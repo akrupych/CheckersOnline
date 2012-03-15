@@ -12,6 +12,7 @@ public:
     bool isEmpty()const;
     Figure* CellFigure();
     void beat();
+    void setCanMove(bool arg);
 };
 
 #endif // CELL_H
