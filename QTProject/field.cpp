@@ -29,14 +29,14 @@ void Field::showField(QGraphicsScene *scene)const
 
                 scene->addRect( x, y, wigth, height, fieldpen, cellbrush );
 
-                if( GameCells[i][j/2] != NULL )
+                if( !GameCells[i][j/2]->isEmpty() )
                 {
-                    if( GameCells[i][j/2]->getColor() == COLOR_RED )
+                    if( GameCells[i][j/2]->CellFigure()->getColor() == COLOR_RED )
                     {
                         scene->addEllipse(x, y, wigth, height, fieldpen, redbrush );
                     }
 
-                    if( GameCells[i][j/2]->getColor() == COLOR_BLUE )
+                    if( GameCells[i][j/2]->CellFigure()->getColor() == COLOR_BLUE )
                     {
                         scene->addEllipse(x, y, wigth, height, fieldpen, bluebrush );
                     }
@@ -53,16 +53,19 @@ Field::Field()
     {
         for( int j = 0; j < COLUMN_NUMBER; j++ )
         {
-            GameCells[i][j] = NULL;
-
             if( i < 3 )
             {
-                GameCells[i][j] = new Figure(COLOR_RED);
+                GameCells[i][j] = new Cell(COLOR_RED);
             }
 
             if( i > 4 )
             {
-                GameCells[i][j] = new Figure(COLOR_BLUE);
+                GameCells[i][j] = new Cell(COLOR_BLUE);
+            }
+
+            if( i <= 4 && i >= 3 )
+            {
+                GameCells[i][j] = new Cell();
             }
         }
     }
@@ -76,11 +79,6 @@ bool Field::isEmpty(unsigned char row, unsigned char column) const
         throw exep;
     }
 
-    if( GameCells[row][column] == NULL )
-    {
-        return false;
-    }
-
-    return true;
+    return GameCells[row][column]->isEmpty();
 }
 
