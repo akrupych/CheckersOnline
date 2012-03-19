@@ -2,7 +2,7 @@
 
 Figure::Figure(unsigned char col)
 {
-    if( col > 2 )
+    if( col != COLOR_RED && col != COLOR_BLUE )
     {
         string exep = "ERROR! unexpected parameter in Figure class constructor\n";
         throw exep;
@@ -25,4 +25,17 @@ bool Figure::isQueen() const
 unsigned char Figure::getColor() const
 {
     return this->color;
+}
+
+unsigned char Figure::getEnemyColor() const
+{
+    if( color == COLOR_RED )
+    {
+        return COLOR_BLUE;
+    }
+
+    else
+    {
+        return COLOR_RED;
+    }
 }
