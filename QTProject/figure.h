@@ -15,6 +15,7 @@ public:
     void setQueen();
     bool isQueen()const;
     unsigned char getColor()const;
+    unsigned char getEnemyColor()const;
 };
 
 #endif // FIGURE_H
